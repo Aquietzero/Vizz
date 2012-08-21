@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vizz Demonstration</title>
+    <script type="text/javascript" src="../lib/Three.js"></script>
+    <script type="text/javascript" src="../compiled/Vizz.js"></script>
+    <style type="text/css">
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="RenderArea">
+    </div>
+
+    <script type="text/javascript">
+
+      var renderer = new Renderer('RenderArea');
+      var bar = new Bar(50, 200, 50, {x:0, y:0, z:0}, 0x0000ff);
+      var animate = function() {
+        renderer.render();
+        window.requestAnimationFrame(animate);
+      };
+
+      renderer.add(bar);
+      animate();
+
+    </script>
+
+  </body>
+</html>
