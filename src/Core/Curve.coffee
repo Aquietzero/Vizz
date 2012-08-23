@@ -1,29 +1,32 @@
 
 # Curve.coffee defines the general curve in 2D. For example:
 #
-#   ^       
-#   |    func      . . . . .
-#   |      `-->  .           .
+#   ^                . . . .
+#   |    func      .        .
+#   |      `-->  .           .            .
 #   |          .              .          . .
-#   |        .                 .       .    .
+#   |                          .       .    .
 # --|---------------------------.-----.-------->
-#   |                            . . .
-#   |        
-#   |        |<------------ range ---------->|
+#   |                            .   .
+#   |                             . .
+#   |                              
+#   |          |<---------- range ---------->|
 #   |
 #
 # @author zero / zhaoyunhaosss@gmail.com
 
 class Curve
 
-  constructor: (@func, @range, @accuracy) ->
+  constructor: (@func, @type, @range, @accuracy) ->
+    @distance   = Distance.getDistance(@type)
+    @coordinate = Coordinate.getCoordinate(@type)
 
   # Calculates the length of the curve in the specific range.
   length: () ->
     len = 0
     x   = @range.begin
     while x < @range.end
-      len += Auxiliary.dist2(0, @func(x), @accuracy, @func(x+@accuracy))
+      len += @distance(0, @func(x), @accuracy, @func(x+@accuracy))
       x += @accuracy
 
     return len
@@ -41,10 +44,10 @@ class Curve
     while counter < n
       if len >= step
         len = 0
-        stops.push(x:x, z:@func(x))
+        stops.push(@coordinate(x, @func(x)))
         counter++
 
-      len += Auxiliary.dist2(0, @func(x), @accuracy, @func(x+@accuracy))
+      len += @distance(0, @func(x), @accuracy, @func(x+@accuracy))
       x += @accuracy
 
     return stops

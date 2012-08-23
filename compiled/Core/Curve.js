@@ -4,10 +4,13 @@
 
   Curve = (function() {
 
-    function Curve(func, range, accuracy) {
+    function Curve(func, type, range, accuracy) {
       this.func = func;
+      this.type = type;
       this.range = range;
       this.accuracy = accuracy;
+      this.distance = Distance.getDistance(this.type);
+      this.coordinate = Coordinate.getCoordinate(this.type);
     }
 
     Curve.prototype.length = function() {
@@ -15,7 +18,7 @@
       len = 0;
       x = this.range.begin;
       while (x < this.range.end) {
-        len += Auxiliary.dist2(0, this.func(x), this.accuracy, this.func(x + this.accuracy));
+        len += this.distance(0, this.func(x), this.accuracy, this.func(x + this.accuracy));
         x += this.accuracy;
       }
       return len;
@@ -31,13 +34,10 @@
       while (counter < n) {
         if (len >= step) {
           len = 0;
-          stops.push({
-            x: x,
-            z: this.func(x)
-          });
+          stops.push(this.coordinate(x, this.func(x)));
           counter++;
         }
-        len += Auxiliary.dist2(0, this.func(x), this.accuracy, this.func(x + this.accuracy));
+        len += this.distance(0, this.func(x), this.accuracy, this.func(x + this.accuracy));
         x += this.accuracy;
       }
       return stops;

@@ -4,22 +4,22 @@
 
   Histogram = (function() {
 
-    function Histogram(data, renderer) {
-      this.data = data;
+    function Histogram(raw_data, renderer) {
+      this.raw_data = raw_data;
       this.renderer = renderer;
     }
 
-    Histogram.prototype.process = function(line, range) {
+    Histogram.prototype.process = function(curve, range) {
       var i, stops;
-      stops = line.stops(this.data.length);
-      Scaler.positions(stops, line.range, range);
+      stops = curve.stops(this.raw_data.length);
+      Scaler.positions(stops, curve.range, range);
       return this.render_data = (function() {
         var _i, _ref, _results;
         _results = [];
-        for (i = _i = 0, _ref = this.data.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+        for (i = _i = 0, _ref = this.raw_data.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
           _results.push({
             pos: stops[i],
-            val: this.data[i]
+            val: this.raw_data[i]
           });
         }
         return _results;
@@ -42,8 +42,8 @@
       return _results;
     };
 
-    Histogram.prototype.onLine = function(line, range) {
-      this.process(line, range);
+    Histogram.prototype.onCurve = function(curve, range) {
+      this.process(curve, range);
       return this.render();
     };
 

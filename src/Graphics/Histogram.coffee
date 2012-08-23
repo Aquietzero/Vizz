@@ -6,16 +6,16 @@
 
 class Histogram
 
-  constructor: (@data, @renderer) ->
+  constructor: (@raw_data, @renderer) ->
 
   # Process data with specific configuration.
-  process: (line, range) ->
-    # Get the points on the line for rendering each piece of data
+  process: (curve, range) ->
+    # Get the points on the curve for rendering each piece of data
     # within the given range.
-    stops = line.stops(@data.length)
-    Scaler.positions(stops, line.range, range)
+    stops = curve.stops(@raw_data.length)
+    Scaler.positions(stops, curve.range, range)
 
-    @render_data = (pos: stops[i], val: @data[i] for i in [0...@data.length])
+    @render_data = (pos: stops[i], val: @raw_data[i] for i in [0...@raw_data.length])
 
   # Render the processed data.
   render: ->
@@ -25,9 +25,9 @@ class Histogram
       bar = new Bar(5, val, 5, {x:pos.x, y:0, z:pos.z}, 0x0000ff);
       @renderer.add(bar)
 
-  # Histogram on line.
-  onLine: (line, range) ->
-    @process(line, range)
+  # Histogram on curve.
+  onCurve: (curve, range) ->
+    @process(curve, range)
     @render()
 
 

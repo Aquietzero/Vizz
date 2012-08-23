@@ -2,15 +2,6 @@
 (function() {
   var Auxiliary;
 
-  Auxiliary = {
-    dist: function(x, y) {
-      return Math.sqrt(x * x + y * y);
-    },
-    dist2: function(x1, y1, x2, y2) {
-      return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-    }
-  };
-
-  this.Auxiliary = Auxiliary;
+  Auxiliary = this.Auxiliary = Auxiliary;
 
 }).call(this);
