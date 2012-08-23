@@ -3,6 +3,14 @@
   var Generator;
 
   Generator = {
+    randomArray: function(n, vibration) {
+      var arr, x, _i, _results;
+      _results = [];
+      for (x = _i = 0; 0 <= n ? _i < n : _i > n; x = 0 <= n ? ++_i : --_i) {
+        _results.push(arr = Random.range(0, vibration));
+      }
+      return _results;
+    },
     randomGrid: function(x_range, z_range, vibration) {
       var grid, x, z;
       grid = (function() {
@@ -13,7 +21,7 @@
             var _j, _results1;
             _results1 = [];
             for (z = _j = 0; 0 <= z_range ? _j < z_range : _j > z_range; z = 0 <= z_range ? ++_j : --_j) {
-              _results1.push(Vizz.Random.range(0, vibration));
+              _results1.push(Random.range(0, vibration));
             }
             return _results1;
           })());
