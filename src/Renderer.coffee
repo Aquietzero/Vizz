@@ -52,7 +52,7 @@ class Renderer
     directionalLight = new THREE.DirectionalLight(0xffffff, 1.0)
     directionalLight.position.set(100, 100, 200)
 
-    ambientLight = new THREE.AmbientLight(0x222222, 0.1)
+    ambientLight = new THREE.AmbientLight(0x111111, 0.1)
 
     @scene.add(directionalLight)
     @scene.add(ambientLight)

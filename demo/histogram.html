@@ -3,7 +3,15 @@
   <head>
     <title>Vizz Demonstration</title>
     <script type="text/javascript" src="../lib/Three.js"></script>
+
+    <script type="text/javascript" src="../compiled/Utils/Random.js"></script>
+    <script type="text/javascript" src="../compiled/Utils/Generator.js"></script>
+
+    <script type="text/javascript" src="../compiled/Renderer.js"></script>
+    <script type="text/javascript" src="../compiled/Geometries.js"></script>
+
     <script type="text/javascript" src="../compiled/Vizz.js"></script>
+
     <style type="text/css">
       body {
         margin: 0;
@@ -18,14 +26,24 @@
 
     <script type="text/javascript">
 
-      var renderer = new Renderer('RenderArea');
-      var bar = new Bar(50, 200, 50, {x:0, y:0, z:0}, 0x0000ff);
+      var renderer = new Vizz.Renderer('RenderArea');
+      // var bar = new Bar(5, 200, 5, {x:0, y:0, z:0}, 0x0000ff);
+      var plane = new Vizz.Bar(500, 1, 500, {x:0, y:0, z:0}, 0xff0000);
       var animate = function() {
         renderer.render();
         window.requestAnimationFrame(animate);
       };
 
+      var randomGrid = Vizz.Generator.randomGrid(10, 10, 150);
+
+      for (var i = 0; i < randomGrid.length; ++i)
+        for (var j = 0; j < randomGrid[0].length; ++j) {
+          bar = new Bar(20, randomGrid[i][j], 20, {x:i*20, y:0, z:j*20}, 0x0000ff);
+          renderer.add(bar);
+        }
+
       renderer.add(bar);
+      renderer.add(plane);
       animate();
 
     </script>
