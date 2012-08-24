@@ -15,14 +15,20 @@
 #
 # @author zero / zhaoyunhaosss@gmail.com
 
+Range      = Vizz.Core.Range
+Scaler     = Vizz.Core.Scaler
 Distance   = Vizz.Core.Distance
 Coordinate = Vizz.Core.Coordinate
 
 class Curve
 
   constructor: (@func, @type, @range, @accuracy) ->
+    @scaler     = Scaler.getScaler(@type)
     @distance   = Distance.getDistance(@type)
     @coordinate = Coordinate.getCoordinate(@type)
+
+  scale: (positions, world_range) ->
+    @scaler(positions, @range, world_range)
 
   # Calculates the length of the curve in the specific range.
   length: () ->
@@ -33,7 +39,6 @@ class Curve
       x += @accuracy
 
     len
-
 
   # Calculate all the stop points according to the number of data
   # and the curve itself.
@@ -55,5 +60,19 @@ class Curve
 
     stops
 
+  # Calculate the bounding rectangle of the curve.
+  boundingRect: ->
+    z_max = -Infinity
+    z_min = Infinity
+
+    x = @range.begin
+    while x < @range.end
+      y = @func(x)
+      z_max = y if y > z_max
+      z_min = y if y < z_min
+      x += @accuracy
+
+    x: @range
+    z: new Range(z_min, z_max)
 
 @Vizz.Core.Curve = Curve

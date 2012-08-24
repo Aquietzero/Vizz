@@ -16,7 +16,7 @@ class Histogram
     # Get the points on the curve for rendering each piece of data
     # within the given range.
     stops = curve.stops(@raw_data.length)
-    Scaler.positions(stops, curve.range, range)
+    curve.scale(stops, range)
 
     @render_data = (pos: stops[i], val: @raw_data[i] for i in [0...@raw_data.length])
 
@@ -25,7 +25,7 @@ class Histogram
     for i in [0...@render_data.length]
       pos = @render_data[i].pos
       val = @render_data[i].val
-      bar = new Bar(5, val, 5, {x:pos.x, y:0, z:pos.z}, 0x0000ff);
+      bar = new Bar(5, val, 5, {x:pos.x, y:0, z:pos.z}, 0x0000ff)
       @renderer.add(bar)
 
   # Histogram on curve.

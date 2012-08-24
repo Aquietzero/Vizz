@@ -8,9 +8,9 @@
 
     <script type="text/javascript" src="../compiled/Core/Distance.js"></script>
     <script type="text/javascript" src="../compiled/Core/Coordinate.js"></script>
+    <script type="text/javascript" src="../compiled/Core/Scaler.js"></script>
     <script type="text/javascript" src="../compiled/Core/Curve.js"></script>
     <script type="text/javascript" src="../compiled/Core/Range.js"></script>
-    <script type="text/javascript" src="../compiled/Core/Scaler.js"></script>
 
     <script type="text/javascript" src="../compiled/Utils/Auxiliary.js"></script>
     <script type="text/javascript" src="../compiled/Utils/Random.js"></script>
@@ -37,19 +37,19 @@
     <script type="text/javascript">
 
       var renderer = new Vizz.Renderer('RenderArea');
-      var data = new Vizz.Utils.Generator.randomArray(50, 100);
+      var data = new Vizz.Utils.Generator.randomArray(250, 100);
       
       var plane = new Vizz.Primitive.Bar(500, 1, 500, {x:0, y:0, z:0}, 0xff0000);
 
       var curve = new Vizz.Core.Curve(
-          function(x) { return x / 20; }, 
+          function(x) { return x / 13; },
           'POLAR', 
-          new Vizz.Core.Range(1, 10), 
+          new Vizz.Core.Range(1, 30), 
           0.01
       );
 
       var histogram = new Vizz.Graphics.Histogram(data, renderer);
-      histogram.onCurve(curve, new Vizz.Core.Range(-420, 420));
+      histogram.onCurve(curve, new Vizz.Core.Range(-1420, 1420));
 
       var animate = function() {
         renderer.render();

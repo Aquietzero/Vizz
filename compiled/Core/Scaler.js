@@ -2,15 +2,55 @@
 (function() {
 
   this.Vizz.Core.Scaler = {
-    positions: function(positions, range_function, range_world) {
-      var p, rate_x, rate_z, _i, _len, _results;
-      rate_x = range_world.begin / range_function.begin;
-      rate_z = range_world.end / range_function.end;
-      _results = [];
+    getScaler: function(type) {
+      switch (type) {
+        case 'CARTESIAN':
+          return this._1d;
+        case 'POLAR':
+          return this._1d;
+        default:
+          return this._1d;
+      }
+    },
+    _1d: function(positions, local_range, world_range) {
+      var factor, local_center, offset, p, world_center, _i, _j, _len, _len1, _results;
+      local_center = local_range.center();
+      world_center = world_range.center();
       for (_i = 0, _len = positions.length; _i < _len; _i++) {
         p = positions[_i];
-        p.x *= rate_x;
-        _results.push(p.z *= rate_z);
+        p.x -= local_center;
+      }
+      factor = world_range.half() / local_range.half();
+      offset = world_center - local_center;
+      _results = [];
+      for (_j = 0, _len1 = positions.length; _j < _len1; _j++) {
+        p = positions[_j];
+        p.x = (p.x - offset) * factor;
+        _results.push(p.z = p.z * factor);
+      }
+      return _results;
+    },
+    _2d: function(positions, local_rect, world_rect) {
+      var factor_x, factor_z, local_center, offset_x, offset_z, p, world_center, _i, _j, _k, _len, _len1, _len2, _results;
+      local_center = local_rect.center();
+      world_center = world_rect.center();
+      for (_i = 0, _len = positions.length; _i < _len; _i++) {
+        p = positions[_i];
+        p.x -= local_center.x;
+      }
+      for (_j = 0, _len1 = positions.length; _j < _len1; _j++) {
+        p = positions[_j];
+        p.z -= local_center.z;
+      }
+      factor_x = world_range.half().x / local_range.half().x;
+      factor_z = world_range.half().z / local_range.half().z;
+      offset_x = world_center.x - local_center.x;
+      offset_z = world_center.z - local_center.z;
+      _results = [];
+      for (_k = 0, _len2 = positions.length; _k < _len2; _k++) {
+        p = positions[_k];
+        p.x = (p.x - offset_x) * factor_x;
+        _results.push(p.z = (p.z - offset_z) * factor_z);
       }
       return _results;
     }

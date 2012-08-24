@@ -16,7 +16,7 @@
     Histogram.prototype.process = function(curve, range) {
       var i, stops;
       stops = curve.stops(this.raw_data.length);
-      Scaler.positions(stops, curve.range, range);
+      curve.scale(stops, range);
       return this.render_data = (function() {
         var _i, _ref, _results;
         _results = [];
