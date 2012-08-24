@@ -24,6 +24,7 @@
     <script type="text/javascript" src="../compiled/Primitives/Segment.js"></script>
 
     <script type="text/javascript" src="../compiled/Graphics/Histogram.js"></script>
+    <script type="text/javascript" src="../compiled/Graphics/LineChart.js"></script>
 
     <script type="text/javascript" src="../compiled/Renderer.js"></script>
 
@@ -42,14 +43,18 @@
     <script type="text/javascript">
 
       var renderer = new Vizz.Renderer('RenderArea');
-      var data = new Vizz.Utils.Generator.randomArray(250, 100);
+      var data = new Vizz.Utils.Generator.randomArray(50, 100);
       
       var plane = new Vizz.Primitive.Bar(500, 1, 500, {x:0, y:0, z:0}, 0xff0000);
-      var segment = new Vizz.Primitive.Segment(
-        new Vizz.Core.Vector3(0, 0, 0),
-        new Vizz.Core.Vector3(100, 300, 0)
+      var curve = new Vizz.Core.Curve(
+          Math.sin,
+          'CARTESIAN', 
+          new Vizz.Core.Range(-6, 6), 
+          0.01
       );
-      segment.solid(5, 0x00ff00);
+
+      var linechart = new Vizz.Graphics.LineChart(data, renderer);
+      linechart.onCurve(curve, new Vizz.Core.Range(-220, 220));
 
       var animate = function() {
         renderer.render();
@@ -57,7 +62,6 @@
       };
 
       renderer.add(plane);
-      renderer.add(segment);
       animate();
 
     </script>
