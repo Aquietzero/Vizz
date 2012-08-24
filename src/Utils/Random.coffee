@@ -3,10 +3,7 @@
 #
 # @author zero / zhaoyunhaosss@gmail.com
 
-Random =
+@Vizz.Utils.Random =
 
   range: (begin, end) ->
-    return begin + (end - begin) * Math.random()
-
-
-@Random = Random
+    begin + (end - begin) * Math.random()

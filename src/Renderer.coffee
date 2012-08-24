@@ -84,5 +84,5 @@ class Renderer
     @renderer.clear()
     @renderer.render(@scene, @camera)
 
-
-@Renderer = Renderer
+ 
+@Vizz.Renderer = Renderer

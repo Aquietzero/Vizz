@@ -4,6 +4,9 @@
 # 
 # @author zero / zhaoyunhaosss@gmail.com
 
+Scaler = @Vizz.Core.Scaler
+Bar    = @Vizz.Primitive.Bar
+
 class Histogram
 
   constructor: (@raw_data, @renderer) ->
@@ -31,4 +34,4 @@ class Histogram
     @render()
 
 
-@Histogram = Histogram
+@Vizz.Graphics.Histogram = Histogram

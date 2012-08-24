@@ -4,13 +4,13 @@
 #
 # @author zero / zhaoyunhaosss@gmail.com
 
-Distance =
+@Vizz.Core.Distance =
 
   segment: (x, y) ->
-    return Math.sqrt(x*x + y*y)
+    Math.sqrt(x*x + y*y)
 
   cartesian: (x1, y1, x2, y2) ->
-    return Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1))
+    Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1))
 
   # Since the delta theta is really small, so the cosine theorm can
   # be applied to estimate the length of the arc between (r1, theta1)
@@ -23,6 +23,3 @@ Distance =
       when 'CARTESIAN' then @cartesian
       when 'POLAR'     then @polar
       else @cartesian
-
-
-@Distance = Distance

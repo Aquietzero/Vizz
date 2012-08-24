@@ -3,7 +3,9 @@
 #
 # @author zero / zhaoyunhaosss@gmail.com
 
-Generator =
+Random = @Vizz.Utils.Random
+
+@Vizz.Utils.Generator =
 
   # Generate an array of size n with all its elements in range
   # [0, vibration]
@@ -17,8 +19,3 @@ Generator =
     grid = for x in [0...x_range]
       for z in [0...z_range]
         Random.range(0, vibration)
-
-    return grid
-
-
-@Generator = Generator

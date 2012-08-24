@@ -4,19 +4,16 @@
 #
 # @author zero / zhaoyunhaosss@gmail.com
 
-Coordinate =
+@Vizz.Core.Coordinate =
 
   cartesian: (x, z) ->
-    return x:x, z:z
+    x:x, z:z
 
   polar: (theta, r) ->
-    return x:r*Math.cos(theta), z:r*Math.sin(theta)
+    x:r*Math.cos(theta), z:r*Math.sin(theta)
 
   getCoordinate: (type) ->
     switch type
       when 'CARTESIAN' then @cartesian
       when 'POLAR'     then @polar
       else @cartesian
-
-
-@Coordinate = Coordinate

@@ -15,6 +15,9 @@
 #
 # @author zero / zhaoyunhaosss@gmail.com
 
+Distance   = Vizz.Core.Distance
+Coordinate = Vizz.Core.Coordinate
+
 class Curve
 
   constructor: (@func, @type, @range, @accuracy) ->
@@ -29,7 +32,7 @@ class Curve
       len += @distance(0, @func(x), @accuracy, @func(x+@accuracy))
       x += @accuracy
 
-    return len
+    len
 
 
   # Calculate all the stop points according to the number of data
@@ -50,7 +53,7 @@ class Curve
       len += @distance(0, @func(x), @accuracy, @func(x+@accuracy))
       x += @accuracy
 
-    return stops
+    stops
 
 
-@Curve = Curve
+@Vizz.Core.Curve = Curve

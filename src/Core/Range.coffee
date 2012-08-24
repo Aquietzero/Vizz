@@ -16,10 +16,10 @@ class Range
 
 
   length: ->
-    return @end - @begin
+    @end - @begin
 
   contain: (i) ->
-    return @begin <= i <= @end
+    @begin <= i <= @end
 
 
-@Range = Range
+@Vizz.Core.Range = Range

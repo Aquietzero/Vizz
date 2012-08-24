@@ -73,6 +73,6 @@
 
   })();
 
-  this.Renderer = Renderer;
+  this.Vizz.Renderer = Renderer;
 
 }).call(this);

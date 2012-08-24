@@ -4,12 +4,17 @@
     <title>Vizz Demonstration</title>
     <script type="text/javascript" src="../lib/Three.js"></script>
 
+    <script type="text/javascript" src="../compiled/Vizz.js"></script>
+
     <script type="text/javascript" src="../compiled/Utils/Random.js"></script>
     <script type="text/javascript" src="../compiled/Utils/Generator.js"></script>
 
-    <script type="text/javascript" src="../compiled/Renderer.js"></script>
-    <script type="text/javascript" src="../compiled/Geometries.js"></script>
+    <script type="text/javascript" src="../compiled/Core/Range.js"></script>
 
+    <script type="text/javascript" src="../compiled/Primitives/Geometry.js"></script>
+    <script type="text/javascript" src="../compiled/Primitives/Bar.js"></script>
+
+    <script type="text/javascript" src="../compiled/Renderer.js"></script>
     <style type="text/css">
       body {
         margin: 0;
@@ -24,19 +29,21 @@
 
     <script type="text/javascript">
 
-      var renderer = new Renderer('RenderArea');
+      console.log(Vizz);
 
-      var plane = new Bar(500, 1, 500, {x:0, y:0, z:0}, 0xff0000);
+      var renderer = new Vizz.Renderer('RenderArea');
+
+      var plane = new Vizz.Primitive.Bar(500, 1, 500, {x:0, y:0, z:0}, 0xff0000);
       var animate = function() {
         renderer.render();
         window.requestAnimationFrame(animate);
       };
 
-      var randomGrid = Generator.randomGrid(10, 10, 150);
+      var randomGrid = Vizz.Utils.Generator.randomGrid(10, 10, 150);
 
       for (var i = 0; i < randomGrid.length; ++i)
         for (var j = 0; j < randomGrid[0].length; ++j) {
-          bar = new Bar(20, randomGrid[i][j], 20, {x:i*20, y:0, z:j*20}, 0x0000ff);
+          bar = new Vizz.Primitive.Bar(20, randomGrid[i][j], 20, {x:i*20, y:0, z:j*20}, 0x0000ff);
           renderer.add(bar);
         }
 

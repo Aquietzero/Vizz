@@ -3,7 +3,4 @@
 #
 # @author zero / zhaoyunhaosss@gmail.com
 
-Auxiliary =
-
-
-@Auxiliary = Auxiliary
+@Vizz.Utils.Auxiliary = null

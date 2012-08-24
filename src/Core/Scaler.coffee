@@ -4,7 +4,7 @@
 #
 # @author zero / zhaoyunhaosss@gmail.com
 
-Scaler =
+@Vizz.Core.Scaler =
 
   positions: (positions, range_function, range_world) ->
     rate_x = range_world.begin / range_function.begin
@@ -13,6 +13,3 @@ Scaler =
     for p in positions
       p.x *= rate_x
       p.z *= rate_z
-
-
-@Scaler = Scaler

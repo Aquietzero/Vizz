@@ -3,11 +3,20 @@
 #
 # @author zero / zhaoyunhaosss@gmail.com
 
-Vizz =
+@Vizz or=
 
   version: 0.02
   author: 'ZERO'
   description: 'Vizz is a little library of data visualization in 3D.'
 
+  Core:
+    description: 'Core data structures.'
 
-@Vizz = Vizz
+  Utils:
+    description: 'Useful helper methods.'
+
+  Primitive:
+    description: 'Different kinds of graphical primitives.'
+
+  Graphics:
+    description: 'Different forms of graphics.'

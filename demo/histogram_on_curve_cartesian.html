@@ -4,22 +4,23 @@
     <title>Vizz Demonstration</title>
     <script type="text/javascript" src="../lib/Three.js"></script>
 
+    <script type="text/javascript" src="../compiled/Vizz.js"></script>
+
+    <script type="text/javascript" src="../compiled/Core/Distance.js"></script>
+    <script type="text/javascript" src="../compiled/Core/Coordinate.js"></script>
     <script type="text/javascript" src="../compiled/Core/Curve.js"></script>
+    <script type="text/javascript" src="../compiled/Core/Range.js"></script>
+    <script type="text/javascript" src="../compiled/Core/Scaler.js"></script>
 
     <script type="text/javascript" src="../compiled/Utils/Auxiliary.js"></script>
-    <script type="text/javascript" src="../compiled/Utils/Coordinate.js"></script>
-    <script type="text/javascript" src="../compiled/Utils/Distance.js"></script>
-    <script type="text/javascript" src="../compiled/Utils/Generator.js"></script>
     <script type="text/javascript" src="../compiled/Utils/Random.js"></script>
-    <script type="text/javascript" src="../compiled/Utils/Range.js"></script>
-    <script type="text/javascript" src="../compiled/Utils/Scaler.js"></script>
+    <script type="text/javascript" src="../compiled/Utils/Generator.js"></script>
 
-    <script type="text/javascript" src="../compiled/Renderer.js"></script>
-    <script type="text/javascript" src="../compiled/Geometries.js"></script>
+    <script type="text/javascript" src="../compiled/Primitives/Geometry.js"></script>
+    <script type="text/javascript" src="../compiled/Primitives/Bar.js"></script>
 
     <script type="text/javascript" src="../compiled/Graphics/Histogram.js"></script>
-
-    <script type="text/javascript" src="../compiled/Vizz.js"></script>
+    <script type="text/javascript" src="../compiled/Renderer.js"></script>
 
     <style type="text/css">
       body {
@@ -35,17 +36,17 @@
 
     <script type="text/javascript">
 
-      var renderer = new Renderer('RenderArea');
-      var data = new Generator.randomArray(50, 100);
+      var renderer = new Vizz.Renderer('RenderArea');
+      var data = new Vizz.Utils.Generator.randomArray(50, 100);
       
-      var plane = new Bar(500, 1, 500, {x:0, y:0, z:0}, 0xff0000);
+      var plane = new Vizz.Primitive.Bar(500, 1, 500, {x:0, y:0, z:0}, 0xff0000);
 
-      var curve = new Curve(Math.sin, 'CARTESIAN', new Range(-6, 6), 0.01);
+      var curve = new Vizz.Core.Curve(Math.sin, 'CARTESIAN', new Vizz.Core.Range(-6, 6), 0.01);
       // var curve = new Curve(function(x) { return x / 20; }, 'POLAR', new Range(1, 10), 0.01);
 
-      var histogram = new Histogram(data, renderer);
+      var histogram = new Vizz.Graphics.Histogram(data, renderer);
       // histogram.onCurve(curve, new Range(-420, 420));
-      histogram.onCurve(curve, new Range(-220, 220));
+      histogram.onCurve(curve, new Vizz.Core.Range(-220, 220));
 
       var animate = function() {
         renderer.render();
