@@ -7,9 +7,24 @@ Geometry = @Vizz.Primitive.Geometry
 
 class Bar extends Geometry
 
-  constructor: (@x_width, @height, @z_width, pos, color) ->
-    geom = new THREE.CubeGeometry(x_width, height, z_width)
-    mesh = new THREE.MeshLambertMaterial(color: color)
+  CONFIG:
+    color   : 0x0000ff
+    opacity : 1.0
+    radius  : 5
+
+  constructor: (@height, pos, config) ->
+    @setConfig(config, @CONFIG)
+
+    geom = new THREE.CubeGeometry(
+      @CONFIG.radius,
+      height,
+      @CONFIG.radius
+    )
+    mesh = new THREE.MeshLambertMaterial(
+      color       : @CONFIG.color
+      opacity     : @CONFIG.opacity
+      transparent : true
+    )
 
     @calCentroid pos
     super(geom, mesh, pos)

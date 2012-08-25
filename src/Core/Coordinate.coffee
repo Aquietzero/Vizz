@@ -7,7 +7,7 @@
 @Vizz.Core.Coordinate =
 
   cartesian: (x, z) ->
-    x:x, z:z
+    x:x, y:0, z:z
 
   polar: (theta, r) ->
     x:r*Math.cos(theta), z:r*Math.sin(theta)

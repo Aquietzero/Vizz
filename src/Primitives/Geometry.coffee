@@ -21,6 +21,8 @@ class Geometry
   setPosition: (pos) ->
     @geometry.position.set(pos.x, pos.y, pos.z)
 
+  # Set orientation of the geometry according to the
+  # given direction.
   setOrientation: (dir) ->
     origin = new Vector3(0, 1, 0)
     target = dir.normalize()
@@ -41,6 +43,13 @@ class Geometry
     )
 
     @geometry.applyMatrix(m)
+
+  # Overwrites the default configuration with the given
+  # user configuration.
+  setConfig: (user_config, default_config) ->
+    for key, val of user_config
+      if default_config.hasOwnProperty(key)
+        default_config[key] = user_config[key]
 
 
 @Vizz.Primitive.Geometry = Geometry

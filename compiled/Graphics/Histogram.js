@@ -31,17 +31,10 @@
     };
 
     Histogram.prototype.render = function() {
-      var bar, i, pos, val, _i, _ref, _results;
+      var i, _i, _ref, _results;
       _results = [];
       for (i = _i = 0, _ref = this.render_data.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
-        pos = this.render_data[i].pos;
-        val = this.render_data[i].val;
-        bar = new Bar(5, val, 5, {
-          x: pos.x,
-          y: 0,
-          z: pos.z
-        }, 0x0000ff);
-        _results.push(this.renderer.add(bar));
+        _results.push(this.renderer.add(new Bar(this.render_data[i].val, this.render_data[i].pos)));
       }
       return _results;
     };

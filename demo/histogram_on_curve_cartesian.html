@@ -6,6 +6,8 @@
 
     <script type="text/javascript" src="../compiled/Vizz.js"></script>
 
+    <script type="text/javascript" src="../compiled/Core/Vector3.js"></script>
+    <script type="text/javascript" src="../compiled/Core/Matrix3.js"></script>
     <script type="text/javascript" src="../compiled/Core/Distance.js"></script>
     <script type="text/javascript" src="../compiled/Core/Coordinate.js"></script>
     <script type="text/javascript" src="../compiled/Core/Scaler.js"></script>
@@ -18,6 +20,7 @@
 
     <script type="text/javascript" src="../compiled/Primitives/Geometry.js"></script>
     <script type="text/javascript" src="../compiled/Primitives/Bar.js"></script>
+    <script type="text/javascript" src="../compiled/Primitives/Plane.js"></script>
 
     <script type="text/javascript" src="../compiled/Graphics/Histogram.js"></script>
     <script type="text/javascript" src="../compiled/Renderer.js"></script>
@@ -39,8 +42,13 @@
       var renderer = new Vizz.Renderer('RenderArea');
       var data = new Vizz.Utils.Generator.randomArray(50, 100);
       
-      var plane = new Vizz.Primitive.Bar(500, 1, 500, {x:0, y:0, z:0}, 0xff0000);
-
+      var plane = new Vizz.Primitive.Plane(
+          500, 
+          new Vizz.Core.Vector3(0, 0, 0), { 
+            color: 0x000099,
+            opacity: 0.3,
+          }
+      );
       var curve = new Vizz.Core.Curve(
           Math.sin,
           'CARTESIAN', 

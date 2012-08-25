@@ -23,10 +23,7 @@ class Histogram
   # Render the processed data.
   render: ->
     for i in [0...@render_data.length]
-      pos = @render_data[i].pos
-      val = @render_data[i].val
-      bar = new Bar(5, val, 5, {x:pos.x, y:0, z:pos.z}, 0x0000ff)
-      @renderer.add(bar)
+      @renderer.add new Bar(@render_data[i].val, @render_data[i].pos)
 
   # Histogram on curve.
   onCurve: (curve, range) ->

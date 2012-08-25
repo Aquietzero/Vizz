@@ -5,6 +5,7 @@
     cartesian: function(x, z) {
       return {
         x: x,
+        y: 0,
         z: z
       };
     },

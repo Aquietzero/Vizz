@@ -35,6 +35,20 @@
       return this.geometry.applyMatrix(m);
     };
 
+    Geometry.prototype.setConfig = function(user_config, default_config) {
+      var key, val, _results;
+      _results = [];
+      for (key in user_config) {
+        val = user_config[key];
+        if (default_config.hasOwnProperty(key)) {
+          _results.push(default_config[key] = user_config[key]);
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
+    };
+
     return Geometry;
 
   })();

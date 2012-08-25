@@ -7,6 +7,7 @@
 Vector3 = @Vizz.Core.Vector3
 Scaler  = @Vizz.Core.Scaler
 Segment = @Vizz.Primitive.Segment
+Sphere  = @Vizz.Primitive.Sphere
 
 class LineChart
 
@@ -33,8 +34,10 @@ class LineChart
         new Vector3(pos_curr.x, val_curr, pos_curr.z),
         new Vector3(pos_next.x, val_next, pos_next.z)
       )
-      segment.dotted(2, 10, 0xffff00)
+      segment.solid(2, 0xffff00)
+      point = new Sphere(5, {x:pos_curr.x, y:val_curr, z:pos_curr.z}, 0xffff00)
       @renderer.add(segment)
+      @renderer.add(point)
 
   # Histogram on curve.
   onCurve: (curve, range) ->
