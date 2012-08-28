@@ -22,7 +22,9 @@
       });
       this.renderer.setSize(this.width, this.height);
       document.getElementById(this.container).appendChild(this.renderer.domElement);
-      return this.renderer.setClearColorHex(0x000000, 1.0);
+      this.renderer.setClearColorHex(0x000000, 1.0);
+      this.renderer.shadowMapEnabled = true;
+      return this.renderer.shadowMapSoft = true;
     };
 
     Renderer.prototype.initScene = function() {
@@ -44,7 +46,12 @@
     Renderer.prototype.initLight = function() {
       var ambientLight, directionalLight;
       directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
-      directionalLight.position.set(100, 100, 200);
+      directionalLight.position.set(50, 100, 200);
+      directionalLight.castShadow = true;
+      directionalLight.shadowBias = -0.00022;
+      directionalLight.shadowDarkness = 0.5;
+      directionalLight.shadowMapWidth = 1024;
+      directionalLight.shadowMapHeight = 1024;
       ambientLight = new THREE.AmbientLight(0x111111, 0.1);
       this.scene.add(directionalLight);
       return this.scene.add(ambientLight);

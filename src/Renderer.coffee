@@ -27,6 +27,9 @@ class Renderer
     document.getElementById(@container).appendChild(@renderer.domElement)
     @renderer.setClearColorHex(0x000000, 1.0)
 
+    @renderer.shadowMapEnabled = true
+    @renderer.shadowMapSoft    = true
+
 
   # Initialize scene.
   initScene: ->
@@ -50,7 +53,14 @@ class Renderer
   initLight: ->
 
     directionalLight = new THREE.DirectionalLight(0xffffff, 1.0)
-    directionalLight.position.set(100, 100, 200)
+    directionalLight.position.set(50, 100, 200)
+
+    directionalLight.castShadow = true
+    directionalLight.shadowBias = -0.00022
+    directionalLight.shadowDarkness = 0.5
+
+    directionalLight.shadowMapWidth  = 1024
+    directionalLight.shadowMapHeight = 1024
 
     ambientLight = new THREE.AmbientLight(0x111111, 0.1)
 

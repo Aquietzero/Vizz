@@ -10,7 +10,7 @@
     x:x, y:0, z:z
 
   polar: (theta, r) ->
-    x:r*Math.cos(theta), z:r*Math.sin(theta)
+    x:r*Math.cos(theta), y:0, z:r*Math.sin(theta)
 
   getCoordinate: (type) ->
     switch type

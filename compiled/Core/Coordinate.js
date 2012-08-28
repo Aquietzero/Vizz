@@ -12,6 +12,7 @@
     polar: function(theta, r) {
       return {
         x: r * Math.cos(theta),
+        y: 0,
         z: r * Math.sin(theta)
       };
     },

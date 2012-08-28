@@ -10,6 +10,9 @@
 
     function Geometry(geom, mesh, pos) {
       this.geometry = new THREE.Mesh(geom, mesh);
+      this.geometry.material.ambient = this.geometry.material.color;
+      this.geometry.castShadow = true;
+      this.geometry.receiveShadow = true;
       this.setPosition(pos);
     }
 

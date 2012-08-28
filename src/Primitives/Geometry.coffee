@@ -11,6 +11,11 @@ class Geometry
 
   constructor: (geom, mesh, pos) ->
     @geometry = new THREE.Mesh(geom, mesh)
+
+    @geometry.material.ambient = @geometry.material.color
+    @geometry.castShadow = true
+    @geometry.receiveShadow = true
+
     @setPosition pos
 
   # Get geometry.

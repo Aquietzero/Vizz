@@ -8,11 +8,11 @@
 
     <script type="text/javascript" src="../compiled/Core/Vector3.js"></script>
     <script type="text/javascript" src="../compiled/Core/Matrix3.js"></script>
+    <script type="text/javascript" src="../compiled/Core/Range.js"></script>
     <script type="text/javascript" src="../compiled/Core/Distance.js"></script>
     <script type="text/javascript" src="../compiled/Core/Coordinate.js"></script>
     <script type="text/javascript" src="../compiled/Core/Scaler.js"></script>
     <script type="text/javascript" src="../compiled/Core/Curve.js"></script>
-    <script type="text/javascript" src="../compiled/Core/Range.js"></script>
 
     <script type="text/javascript" src="../compiled/Utils/Auxiliary.js"></script>
     <script type="text/javascript" src="../compiled/Utils/Random.js"></script>
@@ -49,15 +49,8 @@
             opacity: 0.3,
           }
       );
-      var curve = new Vizz.Core.Curve(
-          Math.sin,
-          'CARTESIAN', 
-          new Vizz.Core.Range(-6, 6), 
-          0.01
-      );
 
       var histogram = new Vizz.Graphics.Histogram(data, renderer);
-      histogram.onCurve(curve, new Vizz.Core.Range(-220, 220));
 
       var animate = function() {
         renderer.render();
