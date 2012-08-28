@@ -12,6 +12,9 @@
   Core:
     description: 'Core data structures.'
 
+  EventHandler:
+    description: 'Mouse event handler and keyboard event handler.'
+
   Utils:
     description: 'Useful helper methods.'
 
