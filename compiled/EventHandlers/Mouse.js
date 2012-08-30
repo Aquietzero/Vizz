@@ -29,7 +29,7 @@
     }
 
     Mouse.prototype.onMouseMove = function(event) {
-      var intersects, obj, objects, ray, vector;
+      var geom, intersect, intersects, obj, ray, vector, _i, _len, _ref, _ref1, _ref2;
       event.preventDefault();
       this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -38,24 +38,32 @@
       ray = new THREE.Ray(this.camera.position, vector.subSelf(this.camera.position).normalize());
       if (this.SELECTED) {
         intersects = ray.intersectObject(this.plane);
-        this.SELECTED.position.copy(intersects[0].point.subSelf(this.offset));
+        this.SELECTED.getGeometry().position.copy(intersects[0].point.subSelf(this.offset));
         return;
       }
-      objects = (function() {
-        var _i, _len, _ref, _results;
-        _ref = this.objects;
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          obj = _ref[_i];
-          _results.push(obj.getGeometry());
+      intersects = [];
+      _ref = this.objects;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        obj = _ref[_i];
+        geom = obj.getGeometry();
+        intersect = ray.intersectObject(geom);
+        if (intersect.length > 0) {
+          intersects.push(obj);
         }
-        return _results;
-      }).call(this);
-      intersects = ray.intersectObjects(objects);
+      }
+      intersects.sort(function(a, b) {
+        return a.getGeometry().distance - b.getGeometry().distance;
+      });
       if (intersects.length > 0) {
-        if (this.INTERSECTED !== intersects[0].object) {
-          this.INTERSECTED = intersects[0].object;
-          this.plane.position.copy(this.INTERSECTED.position);
+        if (this.INTERSECTED !== intersects[0]) {
+          if ((_ref1 = this.INTERSECTED) != null) {
+            _ref1.loseFocus();
+          }
+          this.INTERSECTED = intersects[0];
+          if ((_ref2 = this.INTERSECTED) != null) {
+            _ref2.onFocus();
+          }
+          this.plane.position.copy(this.INTERSECTED.getGeometry().position);
           this.plane.lookAt(this.camera.position);
         }
         return this.renderer.domElement.style.cursor = 'pointer';
@@ -68,25 +76,24 @@
     };
 
     Mouse.prototype.onMouseDown = function(event) {
-      var intersects, obj, objects, ray, vector;
+      var geom, intersect, intersects, obj, ray, vector, _i, _len, _ref;
       event.preventDefault();
       vector = new THREE.Vector3(this.mouse.x, this.mouse.y, 0.5);
       this.projector.unprojectVector(vector, this.camera);
       ray = new THREE.Ray(this.camera.position, vector.subSelf(this.camera.position).normalize());
-      objects = (function() {
-        var _i, _len, _ref, _results;
-        _ref = this.objects;
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          obj = _ref[_i];
-          _results.push(obj.getGeometry());
+      intersects = [];
+      _ref = this.objects;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        obj = _ref[_i];
+        geom = obj.getGeometry();
+        intersect = ray.intersectObject(geom);
+        if (intersect.length > 0) {
+          intersects.push(obj);
         }
-        return _results;
-      }).call(this);
-      intersects = ray.intersectObjects(objects);
+      }
       if (intersects.length > 0) {
         this.controls.enabled = false;
-        this.SELECTED = intersects[0].object;
+        this.SELECTED = intersects[0];
         intersects = ray.intersectObject(this.plane);
         this.offset.copy(intersects[0].point).subSelf(this.plane.position);
         return this.renderer.domElement.style.cursor = 'move';
@@ -97,7 +104,7 @@
       event.preventDefault();
       this.controls.enabled = true;
       if (this.INTERSECTED) {
-        this.plane.position.copy(this.INTERSECTED.position);
+        this.plane.position.copy(this.INTERSECTED.getGeometry().position);
         this.SELECTED = null;
       }
       return this.renderer.domElement.style.cursor = 'auto';

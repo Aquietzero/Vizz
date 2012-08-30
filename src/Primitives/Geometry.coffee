@@ -56,5 +56,9 @@ class Geometry
       if default_config.hasOwnProperty(key)
         default_config[key] = user_config[key]
 
+  onFocus: ->
+
+  loseFocus: ->
+
 
 @Vizz.Primitive.Geometry = Geometry

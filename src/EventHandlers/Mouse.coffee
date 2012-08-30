@@ -39,26 +39,41 @@ class Mouse
 
     ray = new THREE.Ray(@camera.position, vector.subSelf(@camera.position).normalize())
 
+    # Move the object if it has been already selected.
     if @SELECTED
       intersects = ray.intersectObject(@plane)
-      @SELECTED.position.copy(intersects[0].point.subSelf(@offset))
+      @SELECTED.getGeometry().position.copy(intersects[0].point.subSelf(@offset))
       return
 
-    objects  = (obj.getGeometry() for obj in @objects)
-    intersects = ray.intersectObjects(objects)
+    # If no object has been select, then use the ray trace method to find 
+    # which object maybe selected.
+    intersects = []
+    for obj in @objects
+      geom = obj.getGeometry()
+      intersect = ray.intersectObject(geom)
+      intersects.push(obj) if intersect.length > 0
+
+    intersects.sort (a, b) ->
+      a.getGeometry().distance - b.getGeometry().distance
+
     if intersects.length > 0
-      if @INTERSECTED isnt intersects[0].object
-        # if @INTERSECTED
-        #   @INTERSECTED.material.color.setHex(@INTERSECTED.currentHex)
+      if @INTERSECTED isnt intersects[0]
+        
+        # TODO Test event
+        @INTERSECTED?.loseFocus()
 
-        @INTERSECTED = intersects[0].object
-        # @INTERSECTED.currentHex = @INTERSECTED.material.color.getHex()
+        # Focus on the first intersect object.
+        @INTERSECTED = intersects[0]
 
-        @plane.position.copy(@INTERSECTED.position)
+        # TODO Test event
+        @INTERSECTED?.onFocus()
+
+        @plane.position.copy(@INTERSECTED.getGeometry().position)
         @plane.lookAt(@camera.position)
 
       @renderer.domElement.style.cursor = 'pointer'
 
+    # If there aren't any intersect objects, then clear the previous one.
     else
       if @INTERSECTED
         # INTERSECTED.material.color.setHex(INTERSECTED.currentHex)
@@ -73,12 +88,16 @@ class Mouse
 
     ray = new THREE.Ray(@camera.position, vector.subSelf(@camera.position).normalize())
 
-    objects  = (obj.getGeometry() for obj in @objects)
-    intersects = ray.intersectObjects(objects)
+    intersects = []
+    for obj in @objects
+      geom = obj.getGeometry()
+      intersect = ray.intersectObject(geom)
+      intersects.push(obj) if intersect.length > 0
+      
     if intersects.length > 0
       @controls.enabled = false
 
-      @SELECTED = intersects[0].object
+      @SELECTED = intersects[0]
       intersects = ray.intersectObject(@plane)
       @offset.copy(intersects[0].point).subSelf(@plane.position)
 
@@ -89,7 +108,7 @@ class Mouse
 
     @controls.enabled = true
     if @INTERSECTED
-      @plane.position.copy(@INTERSECTED.position)
+      @plane.position.copy(@INTERSECTED.getGeometry().position)
       @SELECTED = null
 
     @renderer.domElement.style.cursor = 'auto'

@@ -12,7 +12,7 @@
 
     Bar.prototype.CONFIG = {
       color: 0x0000ff,
-      opacity: 1.0,
+      opacity: 0.5,
       radius: 5
     };
 
@@ -32,6 +32,14 @@
 
     Bar.prototype.calCentroid = function(pos) {
       return pos.y += this.height / 2;
+    };
+
+    Bar.prototype.onFocus = function() {
+      return this.geometry.material.opacity = 1;
+    };
+
+    Bar.prototype.loseFocus = function() {
+      return this.geometry.material.opacity = this.CONFIG.opacity;
     };
 
     return Bar;

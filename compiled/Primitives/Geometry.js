@@ -52,6 +52,10 @@
       return _results;
     };
 
+    Geometry.prototype.onFocus = function() {};
+
+    Geometry.prototype.loseFocus = function() {};
+
     return Geometry;
 
   })();

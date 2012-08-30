@@ -9,7 +9,7 @@ class Bar extends Geometry
 
   CONFIG:
     color   : 0x0000ff
-    opacity : 1.0
+    opacity : 0.5
     radius  : 5
 
   constructor: (@height, pos, config) ->
@@ -34,6 +34,12 @@ class Bar extends Geometry
   # centroid, so there is necessary to be able to change it.
   calCentroid: (pos) ->
     pos.y += @height / 2
+
+  onFocus: ->
+    @geometry.material.opacity = 1
+
+  loseFocus: ->
+    @geometry.material.opacity = @CONFIG.opacity
 
 
 @Vizz.Primitive.Bar = Bar
