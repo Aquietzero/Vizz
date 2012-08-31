@@ -33,12 +33,12 @@ class Geometry
     target = dir.normalize()
 
     axis = origin.crossProduct(target).normalize()
-    angle = Math.acos(origin.dotProduct(target))
+    angle = Math.acos origin.dotProduct(target)
 
-    rotation = new Matrix3()
-    rotation.setFromAxisAngle(axis, angle)
+    rotation = new Matrix3
+    rotation.setFromAxisAngle axis, angle
 
-    m = new THREE.Matrix4()
+    m = new THREE.Matrix4
     es = rotation.elements
     m.set(
       es[0], es[1], es[2], 0,
@@ -47,18 +47,24 @@ class Geometry
           0,     0,     0, 1
     )
 
-    @geometry.applyMatrix(m)
+    @geometry.applyMatrix m
 
   # Overwrites the default configuration with the given
   # user configuration.
   setConfig: (user_config, default_config) ->
     for key, val of user_config
-      if default_config.hasOwnProperty(key)
+      if default_config.hasOwnProperty key
         default_config[key] = user_config[key]
+
+  setColor: (color) ->
+    @geometry.material.color.setHex color
+
+  setOpacity: (opacity) ->
+    @geometry.material.opacity = opacity
 
   onFocus: ->
 
-  loseFocus: ->
+  onLostFocus: ->
 
 
 @Vizz.Primitive.Geometry = Geometry

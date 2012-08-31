@@ -19,7 +19,7 @@
 
     Segment.prototype.dotted = function(radius, offset, color) {
       var i, p, pos, step, _i, _results;
-      this.geometry = new THREE.Object3D();
+      this.geometry = new THREE.Object3D;
       step = this.len / offset;
       _results = [];
       for (i = _i = 0; 0 <= step ? _i < step : _i > step; i = 0 <= step ? ++_i : --_i) {

@@ -8,8 +8,9 @@ Range  = @Vizz.Core.Range
 Curve  = @Vizz.Core.Curve
 Scaler = @Vizz.Core.Scaler
 Bar    = @Vizz.Primitive.Bar
+Graph  = @Vizz.Graphics.Graph
 
-class Histogram
+class Histogram extends Graph
 
   CONFIG:
     curve: new Curve( ( -> 0), 'CARTESIAN', new Range(-6, 6), 0.01 )
@@ -17,6 +18,8 @@ class Histogram
 
   constructor: (@raw_data, @renderer, config) ->
     @setConfig(config, @CONFIG)
+    super()
+
     @onCurve()
 
   # Process data with specific configuration.
@@ -31,19 +34,14 @@ class Histogram
   # Render the processed data.
   render: ->
     for i in [0...@render_data.length]
-      @renderer.add new Bar(@render_data[i].val, @render_data[i].pos)
+      bar = new Bar(@render_data[i].val, @render_data[i].pos)
+      @graph_data.push bar
+      @renderer.add bar
 
   # Histogram on curve.
-  onCurve: () ->
+  onCurve: ->
     @process()
     @render()
-
-  # Overwrites the default configuration with the given
-  # user configuration.
-  setConfig: (user_config, default_config) ->
-    for key, val of user_config
-      if default_config.hasOwnProperty(key)
-        default_config[key] = user_config[key]
 
 
 @Vizz.Graphics.Histogram = Histogram

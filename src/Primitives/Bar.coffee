@@ -9,25 +9,25 @@ class Bar extends Geometry
 
   CONFIG:
     color   : 0x0000ff
-    opacity : 0.5
+    opacity : 0.7
     radius  : 5
 
   constructor: (@height, pos, config) ->
-    @setConfig(config, @CONFIG)
+    @setConfig config, @CONFIG
 
     geom = new THREE.CubeGeometry(
       @CONFIG.radius,
       height,
       @CONFIG.radius
     )
-    mesh = new THREE.MeshLambertMaterial(
+
+    mesh = new THREE.MeshLambertMaterial
       color       : @CONFIG.color
       opacity     : @CONFIG.opacity
       transparent : true
-    )
 
     @calCentroid pos
-    super(geom, mesh, pos)
+    super geom, mesh, pos
 
   # Set the centroid of the bar, which is in the middle of the height
   # of the bar by default. Since the position is set according to the
@@ -37,9 +37,11 @@ class Bar extends Geometry
 
   onFocus: ->
     @geometry.material.opacity = 1
+    @geometry.material.color.setHex 0x550055
 
-  loseFocus: ->
+  onLostFocus: ->
     @geometry.material.opacity = @CONFIG.opacity
-
+    @geometry.material.color.setHex @CONFIG.color
+    
 
 @Vizz.Primitive.Bar = Bar

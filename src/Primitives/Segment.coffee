@@ -10,13 +10,13 @@ class Segment extends Geometry
 
   constructor: (begin, end) ->
     @p = begin
-    @dir = end.sub(begin)
+    @dir = end.sub begin
     @len = @dir.magnitude()
-    @pos = @p.add(@dir.mul(0.5))
+    @pos = @p.add @dir.mul(0.5)
    
   # A dotted segment.
   dotted: (radius, offset, color) ->
-    @geometry = new THREE.Object3D()
+    @geometry = new THREE.Object3D
 
     step = @len / offset
     # Add dots.
@@ -27,7 +27,7 @@ class Segment extends Geometry
         new THREE.MeshLambertMaterial(color: color)
       )
       p.position.set(pos.x, pos.y, pos.z)
-      @geometry.add(p)
+      @geometry.add p
 
   # A solid segment.
   solid: (radius, color) ->

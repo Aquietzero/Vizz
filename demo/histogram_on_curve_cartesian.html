@@ -24,6 +24,7 @@
     <script type="text/javascript" src="../compiled/Primitives/Bar.js"></script>
     <script type="text/javascript" src="../compiled/Primitives/Plane.js"></script>
 
+    <script type="text/javascript" src="../compiled/Graphics/Graph.js"></script>
     <script type="text/javascript" src="../compiled/Graphics/Histogram.js"></script>
     <script type="text/javascript" src="../compiled/Renderer.js"></script>
 
@@ -52,7 +53,32 @@
           }
       );
 
-      var histogram = new Vizz.Graphics.Histogram(data, renderer);
+      var histogram = new Vizz.Graphics.Histogram(data, renderer, {
+        curve: new Vizz.Core.Curve( Math.sin, 'CARTESIAN', new Vizz.Core.Range(-6, 6), 0.01 )
+      });
+
+      histogram.on(
+        'onFocus', {
+          Color: 0x550055,
+        }
+      ).on(
+        'onLostFocus', {
+          Color: 0x0000ff,
+        }    
+      );
+      /*
+      histogram.on(
+        'focus', {
+          color: 0x550055,
+          opacity: 1,
+        }
+      ).on(
+        'lostFocus', {
+          color: 0x0000ff,
+          opacity: 0.7,
+        }  
+      );
+      */
 
       var animate = function() {
         renderer.render();

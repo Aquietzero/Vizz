@@ -75,8 +75,8 @@ class Renderer
 
   # Add objects to the scene
   add: (obj) ->
-    @objects.push(obj)
-    @scene.add(obj.getGeometry())
+    @objects.push obj
+    @scene.add obj.getGeometry()
 
   # Render
   render: ->

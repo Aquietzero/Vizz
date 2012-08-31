@@ -12,7 +12,7 @@
 
     Bar.prototype.CONFIG = {
       color: 0x0000ff,
-      opacity: 0.5,
+      opacity: 0.7,
       radius: 5
     };
 
@@ -35,11 +35,13 @@
     };
 
     Bar.prototype.onFocus = function() {
-      return this.geometry.material.opacity = 1;
+      this.geometry.material.opacity = 1;
+      return this.geometry.material.color.setHex(0x550055);
     };
 
-    Bar.prototype.loseFocus = function() {
-      return this.geometry.material.opacity = this.CONFIG.opacity;
+    Bar.prototype.onLostFocus = function() {
+      this.geometry.material.opacity = this.CONFIG.opacity;
+      return this.geometry.material.color.setHex(this.CONFIG.color);
     };
 
     return Bar;

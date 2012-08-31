@@ -11,11 +11,11 @@
       this.onMouseDown = __bind(this.onMouseDown, this);
 
       this.onMouseMove = __bind(this.onMouseMove, this);
-      this.mouse = new THREE.Vector2();
-      this.offset = new THREE.Vector3();
+      this.mouse = new THREE.Vector2;
+      this.offset = new THREE.Vector3;
       this.SELECTED = null;
       this.INTERSECTED = null;
-      this.projector = new THREE.Projector();
+      this.projector = new THREE.Projector;
       this.plane = new THREE.Mesh(new THREE.PlaneGeometry(2000, 2000, 8, 8), new THREE.MeshBasicMaterial({
         color: 0x000000
       }));
@@ -57,7 +57,7 @@
       if (intersects.length > 0) {
         if (this.INTERSECTED !== intersects[0]) {
           if ((_ref1 = this.INTERSECTED) != null) {
-            _ref1.loseFocus();
+            _ref1.onLostFocus();
           }
           this.INTERSECTED = intersects[0];
           if ((_ref2 = this.INTERSECTED) != null) {

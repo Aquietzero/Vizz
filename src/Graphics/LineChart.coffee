@@ -8,10 +8,12 @@ Vector3 = @Vizz.Core.Vector3
 Scaler  = @Vizz.Core.Scaler
 Segment = @Vizz.Primitive.Segment
 Sphere  = @Vizz.Primitive.Sphere
+Graph  = @Vizz.Graphics.Graph
 
-class LineChart
+class LineChart extends Graph
 
   constructor: (@raw_data, @renderer) ->
+    super()
 
   # Process data with specific configuration.
   process: (curve, range) ->
