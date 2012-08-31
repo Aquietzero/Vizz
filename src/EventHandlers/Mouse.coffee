@@ -60,13 +60,13 @@ class Mouse
       if @INTERSECTED isnt intersects[0]
         
         # TODO Test event
-        @INTERSECTED?.onLostFocus()
+        @INTERSECTED?.eventHandler.triggered('onLostFocus')
 
         # Focus on the first intersect object.
         @INTERSECTED = intersects[0]
 
         # TODO Test event
-        @INTERSECTED?.onFocus()
+        @INTERSECTED?.eventHandler.triggered('onFocus')
 
         @plane.position.copy @INTERSECTED.getGeometry().position
         @plane.lookAt @camera.position

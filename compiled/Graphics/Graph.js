@@ -34,22 +34,12 @@
       return _results;
     };
 
-    Graph.prototype.on = function(event, effects) {
+    Graph.prototype.on = function(event, attrs) {
       var obj, _i, _len, _ref;
       _ref = this.graph_data;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         obj = _ref[_i];
-        obj[event] = (function(obj, effects) {
-          return function() {
-            var attr, val, _name, _results;
-            _results = [];
-            for (attr in effects) {
-              val = effects[attr];
-              _results.push(typeof obj[_name = 'set' + attr] === "function" ? obj[_name](val) : void 0);
-            }
-            return _results;
-          };
-        })(obj, effects);
+        obj.eventHandler.bind(event, attrs);
       }
       return this;
     };

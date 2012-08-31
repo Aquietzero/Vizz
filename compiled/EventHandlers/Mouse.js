@@ -57,11 +57,11 @@
       if (intersects.length > 0) {
         if (this.INTERSECTED !== intersects[0]) {
           if ((_ref1 = this.INTERSECTED) != null) {
-            _ref1.onLostFocus();
+            _ref1.eventHandler.triggered('onLostFocus');
           }
           this.INTERSECTED = intersects[0];
           if ((_ref2 = this.INTERSECTED) != null) {
-            _ref2.onFocus();
+            _ref2.eventHandler.triggered('onFocus');
           }
           this.plane.position.copy(this.INTERSECTED.getGeometry().position);
           this.plane.lookAt(this.camera.position);

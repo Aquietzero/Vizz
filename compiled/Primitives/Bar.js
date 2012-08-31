@@ -34,16 +34,6 @@
       return pos.y += this.height / 2;
     };
 
-    Bar.prototype.onFocus = function() {
-      this.geometry.material.opacity = 1;
-      return this.geometry.material.color.setHex(0x550055);
-    };
-
-    Bar.prototype.onLostFocus = function() {
-      this.geometry.material.opacity = this.CONFIG.opacity;
-      return this.geometry.material.color.setHex(this.CONFIG.color);
-    };
-
     return Bar;
 
   })(Geometry);

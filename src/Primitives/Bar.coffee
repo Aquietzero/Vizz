@@ -35,13 +35,5 @@ class Bar extends Geometry
   calCentroid: (pos) ->
     pos.y += @height / 2
 
-  onFocus: ->
-    @geometry.material.opacity = 1
-    @geometry.material.color.setHex 0x550055
-
-  onLostFocus: ->
-    @geometry.material.opacity = @CONFIG.opacity
-    @geometry.material.color.setHex @CONFIG.color
-    
 
 @Vizz.Primitive.Bar = Bar

@@ -30,14 +30,8 @@ class Graph
 
   # event: 'onFocus'
   # effect: attr: value
-  on: (event, effects) ->
-    for obj in @graph_data
-      obj[event] = ((obj, effects) ->
-        return ->
-          for attr, val of effects
-            obj['set' + attr]? val
-      )(obj, effects)
-
+  on: (event, attrs) ->
+    obj.eventHandler.bind event, attrs for obj in @graph_data
     @
 
 

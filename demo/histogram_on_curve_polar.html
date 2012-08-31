@@ -14,6 +14,7 @@
     <script type="text/javascript" src="../compiled/Core/Curve.js"></script>
     <script type="text/javascript" src="../compiled/Core/Range.js"></script>
 
+    <script type="text/javascript" src="../compiled/EventHandlers/EventHandler.js"></script>
     <script type="text/javascript" src="../compiled/EventHandlers/Mouse.js"></script>
 
     <script type="text/javascript" src="../compiled/Utils/Auxiliary.js"></script>
@@ -24,6 +25,7 @@
     <script type="text/javascript" src="../compiled/Primitives/Bar.js"></script>
     <script type="text/javascript" src="../compiled/Primitives/Plane.js"></script>
 
+    <script type="text/javascript" src="../compiled/Graphics/Graph.js"></script>
     <script type="text/javascript" src="../compiled/Graphics/Histogram.js"></script>
     <script type="text/javascript" src="../compiled/Renderer.js"></script>
 
@@ -60,6 +62,13 @@
         ),
         range: new Vizz.Core.Range(-1440, 1440),
       });
+
+      histogram.on(
+        'onFocus', {
+          Color: 0x00ff00,
+          Opacity: 1
+        }
+      );
 
       var animate = function() {
         renderer.render();

@@ -6,6 +6,7 @@
 
 Vector3 = @Vizz.Core.Vector3
 Matrix3 = @Vizz.Core.Matrix3
+EventHandler = @Vizz.EventHandler.EventHandler
 
 class Geometry
 
@@ -17,6 +18,10 @@ class Geometry
     @geometry.receiveShadow = true
 
     @setPosition pos
+
+    # Bind the current object as the subject of the event
+    # handler.
+    @eventHandler = new EventHandler @
 
   # Get geometry.
   getGeometry: ->
@@ -61,10 +66,6 @@ class Geometry
 
   setOpacity: (opacity) ->
     @geometry.material.opacity = opacity
-
-  onFocus: ->
-
-  onLostFocus: ->
 
 
 @Vizz.Primitive.Geometry = Geometry
