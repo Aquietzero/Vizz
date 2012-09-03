@@ -19,6 +19,7 @@
     __extends(Histogram, _super);
 
     Histogram.prototype.CONFIG = {
+      basic: null,
       curve: new Curve((function() {
         return 0;
       }), 'CARTESIAN', new Range(-6, 6), 0.01),
@@ -54,16 +55,11 @@
       var bar, i, _i, _ref, _results;
       _results = [];
       for (i = _i = 0, _ref = this.render_data.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
-        bar = new Bar(this.render_data[i].val, this.render_data[i].pos);
+        bar = new Bar(this.render_data[i].val, this.render_data[i].pos, this.CONFIG.basic);
         this.graph_data.push(bar);
         _results.push(this.renderer.add(bar));
       }
       return _results;
-    };
-
-    Histogram.prototype.onCurve = function() {
-      this.process();
-      return this.render();
     };
 
     return Histogram;

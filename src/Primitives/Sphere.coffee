@@ -7,11 +7,20 @@ Geometry = @Vizz.Primitive.Geometry
 
 class Sphere extends Geometry
 
-  constructor: (radius, pos, color) ->
-    geom = new THREE.SphereGeometry(radius, 50, 50)
-    mesh = new THREE.MeshLambertMaterial(color: color)
+  CONFIG:
+    size    : 5
+    color   : 0xffff00
+    opacity : 0.8
+
+  constructor: (pos, config) ->
+    @setConfig config, @CONFIG
+
+    geom = new THREE.SphereGeometry(@CONFIG.size, 20, 20)
+    mesh = new THREE.MeshLambertMaterial
+      color   : @CONFIG.color
+      opacity : @CONFIG.opacity
 
     super(geom, mesh, pos)
 
 
-@Vizz.Primitive.Sphere = Sphere 
+@Vizz.Primitive.Sphere = Sphere

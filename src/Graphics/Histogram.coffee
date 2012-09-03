@@ -13,11 +13,12 @@ Graph  = @Vizz.Graphics.Graph
 class Histogram extends Graph
 
   CONFIG:
+    basic: null # Default to be the configuration of the histogram elements.
     curve: new Curve( ( -> 0), 'CARTESIAN', new Range(-6, 6), 0.01 )
     range: new Range(-220, 220)
 
   constructor: (@raw_data, @renderer, config) ->
-    @setConfig(config, @CONFIG)
+    @setConfig config, @CONFIG
     super()
 
     @onCurve()
@@ -34,14 +35,9 @@ class Histogram extends Graph
   # Render the processed data.
   render: ->
     for i in [0...@render_data.length]
-      bar = new Bar(@render_data[i].val, @render_data[i].pos)
+      bar = new Bar(@render_data[i].val, @render_data[i].pos, @CONFIG.basic)
       @graph_data.push bar
       @renderer.add bar
-
-  # Histogram on curve.
-  onCurve: ->
-    @process()
-    @render()
 
 
 @Vizz.Graphics.Histogram = Histogram

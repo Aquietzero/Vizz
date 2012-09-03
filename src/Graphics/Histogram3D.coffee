@@ -37,7 +37,6 @@ class Histogram3D extends Graph
           pos: stops[i*@raw_data[0].length + j]
           val: @raw_data[i][j]
 
-
   # Render the processed data.
   render: ->
     for i in [0...@render_data.length]

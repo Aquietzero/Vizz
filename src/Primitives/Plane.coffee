@@ -24,4 +24,4 @@ class Plane extends Geometry
 
     super(geom, mesh, pos)
 
-@Vizz.Primitive.Plane = Plane 
+@Vizz.Primitive.Plane = Plane

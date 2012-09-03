@@ -8,32 +8,44 @@ Geometry = @Vizz.Primitive.Geometry
 
 class Segment extends Geometry
 
-  constructor: (begin, end) ->
+  CONFIG:
+    color   : 0xffff00
+    opacity : 0.8
+    radius  : 2
+    offset  : 10
+
+  constructor: (begin, end, config) ->
+    @setConfig config, @CONFIG
+
     @p = begin
     @dir = end.sub begin
     @len = @dir.magnitude()
-    @pos = @p.add @dir.mul(0.5)
+    @pos = @p.add @dir.mul 0.5
    
   # A dotted segment.
-  dotted: (radius, offset, color) ->
+  dotted: ->
     @geometry = new THREE.Object3D
 
-    step = @len / offset
+    step = @len / @CONFIG.offset
     # Add dots.
     for i in [0...step]
-      pos = @p.add(@dir.mul(i * offset / @len))
+      pos = @p.add @dir.mul(i * @CONFIG.offset / @len)
       p = new THREE.Mesh(
-        new THREE.SphereGeometry(radius, 30, 30),
-        new THREE.MeshLambertMaterial(color: color)
+        new THREE.SphereGeometry(@CONFIG.radius, 30, 30),
+        new THREE.MeshLambertMaterial
+          color   : @CONFIG.color
+          opacity : @CONFIG.opacity
       )
       p.position.set(pos.x, pos.y, pos.z)
       @geometry.add p
 
   # A solid segment.
-  solid: (radius, color) ->
+  solid: ->
     @geometry = new THREE.Mesh(
-      new THREE.CylinderGeometry(radius, radius, @len, 50, 50, true)
-      new THREE.MeshLambertMaterial(color: color)
+      new THREE.CylinderGeometry @CONFIG.radius, @CONFIG.radius, @len, 50, 50, true
+      new THREE.MeshLambertMaterial
+        color   : @CONFIG.color
+        opacity : @CONFIG.opacity
     )
 
     @setOrientation(@dir)

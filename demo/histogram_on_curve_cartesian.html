@@ -55,16 +55,20 @@
       );
 
       var histogram = new Vizz.Graphics.Histogram(data, renderer, {
+        basic: {
+          color: 0x008899,
+          radius: 6,
+        },
         curve: new Vizz.Core.Curve( Math.sin, 'CARTESIAN', new Vizz.Core.Range(-6, 6), 0.01 )
       });
 
       histogram.on(
         'onFocus', {
-          Color: 0x550055,
+          Color: 0x004477,
         }
       ).on(
         'onLostFocus', {
-          Color: 0x0000ff,
+          Color: 0x008899,
         }    
       );
 

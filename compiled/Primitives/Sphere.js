@@ -10,11 +10,19 @@
 
     __extends(Sphere, _super);
 
-    function Sphere(radius, pos, color) {
+    Sphere.prototype.CONFIG = {
+      size: 5,
+      color: 0xffff00,
+      opacity: 0.8
+    };
+
+    function Sphere(pos, config) {
       var geom, mesh;
-      geom = new THREE.SphereGeometry(radius, 50, 50);
+      this.setConfig(config, this.CONFIG);
+      geom = new THREE.SphereGeometry(this.CONFIG.size, 20, 20);
       mesh = new THREE.MeshLambertMaterial({
-        color: color
+        color: this.CONFIG.color,
+        opacity: this.CONFIG.opacity
       });
       Sphere.__super__.constructor.call(this, geom, mesh, pos);
     }
